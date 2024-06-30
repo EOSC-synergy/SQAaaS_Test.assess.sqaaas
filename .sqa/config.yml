@@ -1,0 +1,64 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.2.1
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/mattiaBarbo/SQAaaS_Test:
+      branch: main
+      repo: https://github.com/mattiaBarbo/SQAaaS_Test
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/mattiaBarbo/SQAaaS_Test git:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-razzmatazz-crane.sh
+        container: qc.acc_bluesy-pink-rat
+  QC.Doc:
+    repos:
+      github.com/mattiaBarbo/SQAaaS_Test find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-grey-dolphin.sh
+        container: qc.doc_gamy-saffron-woodlouse
+      github.com/mattiaBarbo/SQAaaS_Test git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-chartreuse-chinchilla.sh
+        container: qc.doc_thirsty-eggplant-monkey
+      github.com/mattiaBarbo/SQAaaS_Test markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-corn-rhinoceros.sh
+        container: qc.doc_lovely-lime-sloth
+  QC.Lic:
+    repos:
+      github.com/mattiaBarbo/SQAaaS_Test licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-amethyst-shrew.sh
+        container: qc.lic_squeaky-black-koala
+  QC.Sec:
+    repos:
+      github.com/mattiaBarbo/SQAaaS_Test bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.trippy-taupe-boar.sh
+        container: qc.sec_stuffy-russet-tamarin
+  QC.Sty:
+    repos:
+      github.com/mattiaBarbo/SQAaaS_Test flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-eggplant-grasshopper.sh
+        container: qc.sty_hilly-viridian-tarsier
+  QC.Uni:
+    repos:
+      github.com/mattiaBarbo/SQAaaS_Test commands:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-tomato-discus.sh
+        container: qc.uni_stuffy-scarlet-dollar
+  QC.Ver:
+    repos:
+      github.com/mattiaBarbo/SQAaaS_Test get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-emerald-greyhound.sh
+        container: qc.ver_zippy-cinnamon-millipede
+timeout: 5400
